@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典有声书 - 播客平台</title>
+    <meta name="description" content="精选中国经典文学有声书，包括《南渡北归》《了凡四训》等优质内容">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #eee, #94bbe9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            color: #94bbe9;
+            font-size: 0.9rem;
+        }
+
+        .stat-item strong {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .series-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .series-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .series-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .series-card:nth-child(2) .series-icon {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .series-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .series-author {
+            color: #8892b0;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .series-description {
+            color: #a8b2d1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .series-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94bbe9;
+            font-size: 0.9rem;
+        }
+
+        .meta-icon {
+            font-size: 1.1rem;
+        }
+
+        .listen-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .listen-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .series-card:nth-child(2) .listen-button {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .series-card:nth-child(2) .listen-button:hover {
+            box-shadow: 0 5px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5a6a8a;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #8892b0;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #94bbe9;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+
+            .series-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .stat-item {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>经典有声书</h1>
+            <p class="subtitle">聆听经典，品味人生</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <strong>2</strong> 个系列
+                </div>
+                <div class="stat-item">
+                    <strong>23</strong> 个章节
+                </div>
+                <div class="stat-item">
+                    <strong>免费</strong> 在线收听
+                </div>
+            </div>
+        </header>
+
+        <div class="series-grid">
+            <!-- 南渡北归 -->
+            <div class="series-card">
+                <div class="series-icon">📚</div>
+                <h2 class="series-title">南渡北归</h2>
+                <p class="series-author">岳南 著</p>
+                <p class="series-description">
+                    讲述了抗战爆发前后，中国知识分子和民族精英的命运变迁。从北平到西南联大，从学术圣殿到战火纷飞，一代学人的南渡北归，记录了中国近代史上最动荡的时期。
+                </p>
+                <div class="series-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📝</span>
+                        <span>19 章节</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎧</span>
+                        <span>历史纪实</span>
+                    </div>
+                </div>
+                <a href="./nandu-beigui/" class="listen-button">开始收听 →</a>
+            </div>
+
+            <!-- 了凡四训 -->
+            <div class="series-card">
+                <div class="series-icon">🎋</div>
+                <h2 class="series-title">了凡四训</h2>
+                <p class="series-author">袁了凡 著</p>
+                <p class="series-description">
+                    明代思想家袁了凡的传世名作，包含立命之学、改过之法、积善之方、谦德之效四篇。通过自身经历阐述改变命运的方法，强调立志、改过、行善、谦逊的重要性。
+                </p>
+                <div class="series-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📝</span>
+                        <span>4 章节</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎧</span>
+                        <span>国学经典</span>
+                    </div>
+                </div>
+                <a href="./liaofan-sixun/" class="listen-button">开始收听 →</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>精选中国经典文学有声书 | 持续更新中</p>
+            <div class="footer-links">
+                <a href="https://github.com/mason0510" target="_blank">GitHub</a>
+                <a href="#" onclick="alert('如有问题或建议，请通过 GitHub Issues 反馈'); return false;">反馈建议</a>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.85rem;">Hosted on GitHub Pages</p>
+        </footer>
+    </div>
+</body>
+</html>

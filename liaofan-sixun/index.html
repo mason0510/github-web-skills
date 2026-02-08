@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>了凡四训 - 有声书</title>
+    <meta name="description" content="明代袁了凡传世名作，包含立命之学、改过之法、积善之方、谦德之效四篇">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #8892b0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #94bbe9;
+            transform: translateX(-5px);
+        }
+
+        .back-link::before {
+            content: "← ";
+            margin-right: 5px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1rem;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .intro p {
+            color: #a8b2d1;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .playlist {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .track:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .track:last-child {
+            margin-bottom: 0;
+        }
+
+        .track-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .track-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .track-title {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .progress-indicator {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 2px 8px;
+            background: rgba(240, 147, 251, 0.2);
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: #f093fb;
+        }
+
+        .track audio {
+            width: 100%;
+            height: 36px;
+            border-radius: 18px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5a6a8a;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .track {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .track-number {
+                margin-bottom: 10px;
+            }
+
+            .track-info {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">返回首页</a>
+        <header>
+            <h1>了凡四训</h1>
+            <p class="subtitle">袁了凡 著 | 有声书</p>
+        </header>
+
+        <div class="intro">
+            <p>《了凡四训》是明代思想家袁了凡的传世名作，全书分为四个部分：</p>
+            <p><strong>立命之学</strong> - 阐述如何改变命运，摆脱宿命论的束缚</p>
+            <p><strong>改过之法</strong> - 讲述改正过错的具体方法和重要性</p>
+            <p><strong>积善之方</strong> - 说明行善积德的各种途径和意义</p>
+            <p><strong>谦德之效</strong> - 强调谦虚的美德及其带来的益处</p>
+        </div>
+
+        <div class="playlist">
+            <div class="track">
+                <div class="track-number">一</div>
+                <div class="track-info">
+                    <div class="track-title">第一篇 - 立命之学</div>
+                    <audio controls preload="none">
+                        <source src="https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/liaofan-sixun/01-liminzhixue.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+
+            <div class="track">
+                <div class="track-number">二</div>
+                <div class="track-info">
+                    <div class="track-title">第二篇 - 改过之法</div>
+                    <audio controls preload="none">
+                        <source src="https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/liaofan-sixun/02-gaiguozhifa.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+
+            <div class="track">
+                <div class="track-number">三</div>
+                <div class="track-info">
+                    <div class="track-title">第三篇 - 积善之方</div>
+                    <audio controls preload="none">
+                        <source src="https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/liaofan-sixun/03-jishanzhifang.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+
+            <div class="track">
+                <div class="track-number">四</div>
+                <div class="track-info">
+                    <div class="track-title">第四篇 - 谦德之效</div>
+                    <audio controls preload="none">
+                        <source src="https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/liaofan-sixun/04-qiandezhixiao.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Hosted on GitHub Pages</p>
+        </footer>
+    </div>
+
+    <script>
+        // 播放进度保存功能
+        const STORAGE_KEY = 'liaofan-sixun-progress';
+
+        // 获取所有音频元素
+        const audioElements = document.querySelectorAll('audio');
+
+        // 加载进度
+        function loadProgress() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    return {};
+                }
+            }
+            return {};
+        }
+
+        // 保存进度
+        function saveProgress(trackId, currentTime, duration) {
+            const progress = loadProgress();
+            progress[trackId] = {
+                time: currentTime,
+                duration: duration,
+                percentage: Math.round((currentTime / duration) * 100)
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        }
+
+        // 恢复进度
+        function restoreProgress(audio, trackId) {
+            const progress = loadProgress();
+            if (progress[trackId] && progress[trackId].time > 3) {
+                audio.currentTime = progress[trackId].time;
+
+                // 显示进度提示
+                const trackInfo = audio.closest('.track-info');
+                const indicator = document.createElement('span');
+                indicator.className = 'progress-indicator';
+                indicator.textContent = `上次播放到 ${progress[trackId].percentage}%`;
+                trackInfo.querySelector('.track-title').appendChild(indicator);
+            }
+        }
+
+        // 为每个音频添加事件监听
+        audioElements.forEach((audio, index) => {
+            const trackId = `track-${index + 1}`;
+
+            // 加载元数据后恢复进度
+            audio.addEventListener('loadedmetadata', () => {
+                restoreProgress(audio, trackId);
+            });
+
+            // 定期保存进度（每5秒）
+            let saveInterval;
+            audio.addEventListener('play', () => {
+                saveInterval = setInterval(() => {
+                    if (!audio.paused) {
+                        saveProgress(trackId, audio.currentTime, audio.duration);
+                    }
+                }, 5000);
+            });
+
+            audio.addEventListener('pause', () => {
+                clearInterval(saveInterval);
+                saveProgress(trackId, audio.currentTime, audio.duration);
+            });
+
+            audio.addEventListener('ended', () => {
+                clearInterval(saveInterval);
+                // 播放完成，清除进度
+                const progress = loadProgress();
+                delete progress[trackId];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+            });
+        });
+    </script>
+</body>
+</html>
