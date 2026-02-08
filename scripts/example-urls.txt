@@ -1,0 +1,7 @@
+# 示例音频URL列表
+# 每行一个URL，支持 https://
+# # 开头的行为注释
+
+https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/2025-12-28/nandu_beigui_01.mp3
+https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/2025-12-28/nandu_beigui_02.mp3
+https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/2025-12-28/nandu_beigui_03.mp3

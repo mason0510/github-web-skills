@@ -22,6 +22,13 @@
 - **在线收听**: [了凡四训](https://mason0510.github.io/github-web-skills/liaofan-sixun/)
 - **简介**: 明代思想家袁了凡的传世名作，阐述改变命运的方法
 
+### 3. Dan Koe 人生重构协议
+- **作者**: Dan Koe
+- **章节数**: 1集
+- **类型**: 个人成长
+- **在线收听**: [Dan Koe 人生重构协议](https://mason0510.github.io/github-web-skills/dan-koe-protocol/)
+- **简介**: 用24小时重装你的人生系统，通过身份认同重塑实现真正改变
+
 ---
 
 ## ✨ 功能特色
@@ -75,6 +82,8 @@ github-web-skills/
 ├── nandu-beigui/           # 南渡北归系列
 │   └── index.html          # 播放页面
 ├── liaofan-sixun/          # 了凡四训系列
+│   └── index.html          # 播放页面
+├── dan-koe-protocol/       # Dan Koe 人生重构协议
 │   └── index.html          # 播放页面
 ├── scripts/                # 部署脚本（GitHub Pages）
 ├── examples/               # 配置示例
@@ -152,10 +161,10 @@ https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/
 
 | 指标 | 数值 |
 |------|------|
-| 播客系列 | 2 个 |
-| 总章节数 | 23 章 |
-| 音频文件 | ~5.5 MB (了凡四训) + 多章节 (南渡北归) |
-| 代码行数 | ~800 行 (HTML+CSS+JS) |
+| 播客系列 | 3 个 |
+| 总章节数 | 24 章 |
+| 音频文件 | ~22 MB (Dan Koe 14MB + 了凡四训 3.3MB + 南渡北归多章节) |
+| 代码行数 | ~1200 行 (HTML+CSS+JS) |
 | 外部依赖 | 0 个 |
 
 ---

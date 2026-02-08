@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan Koe 人生重构协议 - 播客</title>
+    <meta name="description" content="用24小时重装你的人生系统 - Dan Koe 人生重构协议完整播客">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #8892b0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #94bbe9;
+            transform: translateX(-5px);
+        }
+
+        .back-link::before {
+            content: "← ";
+            margin-right: 5px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #f5af19, #f12711);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.8;
+        }
+
+        .intro h2 {
+            color: #f5af19;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .intro p {
+            color: #a8b2d1;
+            margin-bottom: 15px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro strong {
+            color: #fff;
+        }
+
+        .highlight-box {
+            background: rgba(245, 175, 25, 0.1);
+            border-left: 4px solid #f5af19;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p {
+            color: #fff;
+            margin: 0;
+        }
+
+        .audio-player {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .player-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f5af19, #f12711);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 30px rgba(245, 175, 25, 0.3);
+        }
+
+        .track-title {
+            font-size: 1.4rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .track-duration {
+            text-align: center;
+            color: #8892b0;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        audio {
+            width: 100%;
+            height: 50px;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-indicator {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 4px 12px;
+            background: rgba(245, 175, 25, 0.2);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #f5af19;
+        }
+
+        .key-points {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .key-points h3 {
+            color: #f5af19;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 12px 0 12px 30px;
+            color: #a8b2d1;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .key-points li::before {
+            content: "▸";
+            position: absolute;
+            left: 8px;
+            color: #f5af19;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5a6a8a;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .intro {
+                padding: 20px;
+            }
+
+            .audio-player {
+                padding: 30px 20px;
+            }
+
+            .player-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">返回首页</a>
+
+        <header>
+            <h1>Dan Koe 人生重构协议</h1>
+            <p class="subtitle">用24小时重装你的人生系统</p>
+        </header>
+
+        <div class="intro">
+            <h2>📖 内容简介</h2>
+            <p>这篇播客详细介绍了知名创作者 <strong>Dan Koe</strong> 关于个人转型的核心逻辑，强调真正的改变源于<strong>身份认同的重塑</strong>，而非浅层的行为约束。</p>
+
+            <div class="highlight-box">
+                <p><strong>核心观点</strong>：人们无法实现目标是因为潜意识在追求安全感或逃避评判，因此必须通过提升心理维度来打破旧有的认知循环。</p>
+            </div>
+
+            <p>文中提出了名为 <strong>"Dan Koe 协议"</strong> 的一日行动指南，指导你通过：</p>
+            <p>• <strong>晨间</strong> - 挖掘痛苦与愿景</p>
+            <p>• <strong>日间</strong> - 打断自动驾驶模式</p>
+            <p>• <strong>晚间</strong> - 综合洞见来重构生活</p>
+
+            <p style="margin-top: 15px;">该方案建议将人生游戏化，通过设定反面愿景、核心任务和每日杠杆，建立起一套<strong>抵御分心的系统架构</strong>。这种方法旨在帮助个人从被动接受社会编程，转向拥有高度能动性的高智商进化路径。</p>
+        </div>
+
+        <div class="audio-player">
+            <div class="player-icon">🎧</div>
+            <div class="track-title">
+                完整版播客
+                <span class="progress-indicator" style="display: none;">上次播放到 0%</span>
+            </div>
+            <div class="track-duration">时长：约 18 分钟</div>
+            <audio id="mainAudio" controls preload="metadata">
+                <source src="https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/audio/dan-koe/life-reboot-protocol.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放
+            </audio>
+        </div>
+
+        <div class="key-points">
+            <h3>🎯 核心要点</h3>
+            <ul>
+                <li><strong>身份重塑</strong> - 真正的改变不是强迫自己改掉坏习惯，而是成为一个不需要那些习惯的人</li>
+                <li><strong>心理维度提升</strong> - 通过提高认知层次，自然突破旧有的思维和行为模式</li>
+                <li><strong>一日重构协议</strong> - 晨间反思痛苦、日间打断惯性、晚间整合洞见的完整系统</li>
+                <li><strong>人生游戏化</strong> - 设定反面愿景激发动力，将目标转化为每日可执行的杠杆任务</li>
+                <li><strong>抵御分心系统</strong> - 建立防御机制，保护注意力免受社会编程干扰</li>
+                <li><strong>高智商进化</strong> - 从被动接受到主动创造，培养高度能动性的思维方式</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>来源：Dan Koe 人生重构协议 | 播客制作：2026-02-08</p>
+            <p style="margin-top: 10px;">Hosted on GitHub Pages</p>
+        </footer>
+    </div>
+
+    <script>
+        // 播放进度保存功能
+        const STORAGE_KEY = 'dan-koe-protocol-progress';
+        const audio = document.getElementById('mainAudio');
+        const progressIndicator = document.querySelector('.progress-indicator');
+
+        // 加载进度
+        function loadProgress() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        // 保存进度
+        function saveProgress(currentTime, duration) {
+            const progress = {
+                time: currentTime,
+                duration: duration,
+                percentage: Math.round((currentTime / duration) * 100)
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        }
+
+        // 恢复进度
+        audio.addEventListener('loadedmetadata', () => {
+            const progress = loadProgress();
+            if (progress && progress.time > 3) {
+                audio.currentTime = progress.time;
+                progressIndicator.textContent = `上次播放到 ${progress.percentage}%`;
+                progressIndicator.style.display = 'inline-block';
+            }
+        });
+
+        // 定期保存进度（每5秒）
+        let saveInterval;
+        audio.addEventListener('play', () => {
+            saveInterval = setInterval(() => {
+                if (!audio.paused) {
+                    saveProgress(audio.currentTime, audio.duration);
+                    const percentage = Math.round((audio.currentTime / audio.duration) * 100);
+                    progressIndicator.textContent = `上次播放到 ${percentage}%`;
+                    progressIndicator.style.display = 'inline-block';
+                }
+            }, 5000);
+        });
+
+        audio.addEventListener('pause', () => {
+            clearInterval(saveInterval);
+            saveProgress(audio.currentTime, audio.duration);
+        });
+
+        audio.addEventListener('ended', () => {
+            clearInterval(saveInterval);
+            // 播放完成，清除进度
+            localStorage.removeItem(STORAGE_KEY);
+            progressIndicator.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
