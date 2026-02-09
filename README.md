@@ -29,6 +29,17 @@
 - **在线收听**: [Dan Koe 人生重构协议](https://mason0510.github.io/github-web-skills/dan-koe-protocol/)
 - **简介**: 用24小时重装你的人生系统，通过身份认同重塑实现真正改变
 
+### 4. 视频库 🎬 (NEW!)
+- **类型**: AI 生成 · 产品演示 · 技术分享
+- **视频数**: 1 个（持续更新）
+- **在线观看**: [视频库](https://mason0510.github.io/github-web-skills/videos/)
+- **特色功能**: 支持标签筛选（全部、AI生成、产品演示、教程、技术分享）
+- **首发视频**:
+  - **即梦 Seed 2.0 - AI 视频生成演示** (56秒, 1080p)
+    - 展示国内前沿 AI 视频生成技术
+    - 支持文生视频、图生视频多种模式
+    - [观看视频](https://mason0510.github.io/github-web-skills/videos/seed-2.0/)
+
 ---
 
 ## ✨ 功能特色
@@ -78,13 +89,17 @@ python3 -m http.server 8000
 
 ```
 github-web-skills/
-├── index.html              # 首页（展示所有系列）
+├── index.html              # 首页（展示所有系列 + 视频库）
 ├── nandu-beigui/           # 南渡北归系列
 │   └── index.html          # 播放页面
 ├── liaofan-sixun/          # 了凡四训系列
 │   └── index.html          # 播放页面
 ├── dan-koe-protocol/       # Dan Koe 人生重构协议
 │   └── index.html          # 播放页面
+├── videos/                 # 视频库（NEW!）
+│   ├── index.html          # 视频库首页（支持标签筛选）
+│   └── seed-2.0/           # 即梦 Seed 2.0 视频
+│       └── index.html      # 视频播放页
 ├── scripts/                # 部署脚本（GitHub Pages）
 ├── examples/               # 配置示例
 ├── SKILL.md                # GitHub Pages 部署技能文档
@@ -162,10 +177,13 @@ https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/
 | 指标 | 数值 |
 |------|------|
 | 播客系列 | 3 个 |
-| 总章节数 | 24 章 |
+| 视频库 | 1 个（持续更新）|
+| 总内容数 | 24+ 个章节/视频 |
 | 音频文件 | ~22 MB (Dan Koe 14MB + 了凡四训 3.3MB + 南渡北归多章节) |
-| 代码行数 | ~1200 行 (HTML+CSS+JS) |
+| 视频文件 | ~33 MB (即梦 Seed 2.0 1080p) |
+| 代码行数 | ~1800 行 (HTML+CSS+JS) |
 | 外部依赖 | 0 个 |
+| 特色功能 | 标签筛选、进度记忆、响应式设计 |
 
 ---
 

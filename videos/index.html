@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频库 - AI & 技术演示</title>
+    <meta name="description" content="精选AI生成、产品演示、技术教程视频集合">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 返回导航 */
+        .back-nav {
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #8892b0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #64ffda;
+        }
+
+        /* 页面标题 */
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #64ffda, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* 标签筛选 */
+        .filter-tags {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tag-button {
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: #8892b0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .tag-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(100, 255, 218, 0.3);
+            color: #64ffda;
+        }
+
+        .tag-button.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 视频网格 */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .video-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .video-description {
+            color: #a8b2d1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #8892b0;
+            font-size: 0.85rem;
+        }
+
+        .video-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .video-tag {
+            padding: 4px 12px;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 12px;
+            color: #64ffda;
+            font-size: 0.8rem;
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8892b0;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 1.1rem;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5a6a8a;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tags {
+                gap: 10px;
+            }
+
+            .tag-button {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="back-nav">
+            <a href="../" class="back-link">← 返回首页</a>
+        </nav>
+
+        <header>
+            <h1>🎬 视频库</h1>
+            <p class="subtitle">AI 生成 · 产品演示 · 技术分享</p>
+        </header>
+
+        <!-- 标签筛选 -->
+        <div class="filter-tags">
+            <button class="tag-button active" data-tag="all">全部视频</button>
+            <button class="tag-button" data-tag="AI生成">AI 生成</button>
+            <button class="tag-button" data-tag="产品演示">产品演示</button>
+            <button class="tag-button" data-tag="教程">教程</button>
+            <button class="tag-button" data-tag="技术分享">技术分享</button>
+        </div>
+
+        <!-- 视频网格 -->
+        <div class="videos-grid" id="videosGrid">
+            <!-- 视频卡片将通过JavaScript动态生成 -->
+        </div>
+
+        <!-- 空状态 -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-state-icon">🔍</div>
+            <p class="empty-state-text">暂无匹配的视频</p>
+        </div>
+
+        <footer>
+            <p>视频库持续更新中 | 支持标签筛选</p>
+        </footer>
+    </div>
+
+    <script>
+        // 视频数据（后续可以改为从JSON文件读取）
+        const videosData = [
+            {
+                id: 'seed-2.0',
+                title: '即梦 Seed 2.0 - AI 视频生成',
+                description: 'Seed 2.0 是即梦推出的新一代 AI 视频生成模型，支持文生视频、图生视频等多种模式，画质流畅自然。',
+                thumbnail: 'https://pub-87cd59069cf0444aad048f7bddec99af.r2.dev/videos/seed-2.0/thumbnail.jpg',
+                duration: '56秒',
+                date: '2026-02-09',
+                tags: ['AI生成', '产品演示'],
+                url: './seed-2.0/'
+            }
+            // 未来添加更多视频：
+            // {
+            //     id: 'video-2',
+            //     title: '视频标题',
+            //     description: '视频简介...',
+            //     thumbnail: 'URL',
+            //     duration: '时长',
+            //     date: '日期',
+            //     tags: ['标签1', '标签2'],
+            //     url: './video-2/'
+            // }
+        ];
+
+        // 渲染视频网格
+        function renderVideos(filterTag = 'all') {
+            const grid = document.getElementById('videosGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            // 筛选视频
+            const filteredVideos = filterTag === 'all'
+                ? videosData
+                : videosData.filter(video => video.tags.includes(filterTag));
+
+            // 清空网格
+            grid.innerHTML = '';
+
+            // 显示/隐藏空状态
+            if (filteredVideos.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            } else {
+                grid.style.display = 'grid';
+                emptyState.style.display = 'none';
+            }
+
+            // 渲染视频卡片
+            filteredVideos.forEach(video => {
+                const card = document.createElement('a');
+                card.className = 'video-card';
+                card.href = video.url;
+
+                card.innerHTML = `
+                    <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <h2 class="video-title">${video.title}</h2>
+                        <p class="video-description">${video.description}</p>
+                        <div class="video-meta">
+                            <div class="meta-item">
+                                <span>⏱️</span>
+                                <span>${video.duration}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>📅</span>
+                                <span>${video.date}</span>
+                            </div>
+                        </div>
+                        <div class="video-tags">
+                            ${video.tags.map(tag => `<span class="video-tag">#${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 标签筛选逻辑
+        document.querySelectorAll('.tag-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有active状态
+                document.querySelectorAll('.tag-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // 添加active到当前按钮
+                this.classList.add('active');
+
+                // 获取标签并渲染
+                const tag = this.getAttribute('data-tag');
+                renderVideos(tag);
+            });
+        });
+
+        // 初始渲染
+        renderVideos();
+    </script>
+</body>
+</html>
