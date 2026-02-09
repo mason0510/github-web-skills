@@ -134,6 +134,19 @@
             aspect-ratio: 16 / 9;
             object-fit: cover;
             background: rgba(0, 0, 0, 0.3);
+            content-visibility: auto;
+        }
+
+        /* 骨架屏加载动画 */
+        .video-card.is-loading .video-thumbnail {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         .video-info {
@@ -492,11 +505,17 @@
             // 渲染视频卡片
             filteredVideos.forEach(video => {
                 const card = document.createElement('a');
-                card.className = 'video-card';
+                card.className = 'video-card is-loading';
                 card.href = video.url;
 
                 card.innerHTML = `
-                    <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail" loading="lazy">
+                    <img src="${video.thumbnail}"
+                         alt="${video.title}"
+                         class="video-thumbnail"
+                         loading="lazy"
+                         decoding="async"
+                         onload="this.parentElement.classList.remove('is-loading')"
+                         onerror="this.parentElement.classList.remove('is-loading')">
                     <div class="video-info">
                         <h2 class="video-title">${video.title}</h2>
                         <p class="video-description">${video.description}</p>
