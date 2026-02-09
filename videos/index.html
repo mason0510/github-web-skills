@@ -479,7 +479,71 @@
             }
         ];
 
-        // 渲染视频网格
+        // Intersection Observer 用于懒加载
+        const observerOptions = {
+            root: null,
+            rootMargin: '200px', // 提前 200px 开始加载
+            threshold: 0
+        };
+
+        let observer = null;
+
+        // 创建视频卡片 DOM
+        function createVideoCard(video) {
+            const card = document.createElement('a');
+            card.className = 'video-card is-loading';
+            card.href = video.url;
+            card.dataset.videoId = video.id;
+
+            card.innerHTML = `
+                <img src="${video.thumbnail}"
+                     alt="${video.title}"
+                     class="video-thumbnail"
+                     loading="lazy"
+                     decoding="async"
+                     onload="this.parentElement.classList.remove('is-loading')"
+                     onerror="this.parentElement.classList.remove('is-loading')">
+                <div class="video-info">
+                    <h2 class="video-title">${video.title}</h2>
+                    <p class="video-description">${video.description}</p>
+                    <div class="video-meta">
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>${video.duration}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>📅</span>
+                            <span>${video.date}</span>
+                        </div>
+                    </div>
+                    <div class="video-tags">
+                        ${video.tags.map(tag => `<span class="video-tag">#${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // 创建占位符
+        function createPlaceholder(video) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'video-card is-loading';
+            placeholder.dataset.videoId = video.id;
+            placeholder.style.minHeight = '400px';
+
+            placeholder.innerHTML = `
+                <div class="video-thumbnail"></div>
+                <div class="video-info">
+                    <div style="height: 28px; background: rgba(255,255,255,0.05); border-radius: 4px; margin-bottom: 10px;"></div>
+                    <div style="height: 40px; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
+                </div>
+            `;
+
+            return placeholder;
+        }
+
+        // 渲染视频网格（懒加载版本）
         function renderVideos(filterTag = 'all') {
             const grid = document.getElementById('videosGrid');
             const emptyState = document.getElementById('emptyState');
@@ -489,8 +553,11 @@
                 ? videosData
                 : videosData.filter(video => video.tags.includes(filterTag));
 
-            // 清空网格
+            // 清空网格和旧的 observer
             grid.innerHTML = '';
+            if (observer) {
+                observer.disconnect();
+            }
 
             // 显示/隐藏空状态
             if (filteredVideos.length === 0) {
@@ -502,40 +569,44 @@
                 emptyState.style.display = 'none';
             }
 
-            // 渲染视频卡片
-            filteredVideos.forEach(video => {
-                const card = document.createElement('a');
-                card.className = 'video-card is-loading';
-                card.href = video.url;
+            // 首屏优先：前 6 个立即渲染，其余懒加载
+            const PRIORITY_COUNT = 6;
 
-                card.innerHTML = `
-                    <img src="${video.thumbnail}"
-                         alt="${video.title}"
-                         class="video-thumbnail"
-                         loading="lazy"
-                         decoding="async"
-                         onload="this.parentElement.classList.remove('is-loading')"
-                         onerror="this.parentElement.classList.remove('is-loading')">
-                    <div class="video-info">
-                        <h2 class="video-title">${video.title}</h2>
-                        <p class="video-description">${video.description}</p>
-                        <div class="video-meta">
-                            <div class="meta-item">
-                                <span>⏱️</span>
-                                <span>${video.duration}</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>📅</span>
-                                <span>${video.date}</span>
-                            </div>
-                        </div>
-                        <div class="video-tags">
-                            ${video.tags.map(tag => `<span class="video-tag">#${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
+            filteredVideos.forEach((video, index) => {
+                if (index < PRIORITY_COUNT) {
+                    // 首屏直接渲染
+                    const card = createVideoCard(video);
+                    grid.appendChild(card);
+                } else {
+                    // 非首屏：先插入占位符，滚动到附近时替换为真实卡片
+                    const placeholder = createPlaceholder(video);
+                    grid.appendChild(placeholder);
 
-                grid.appendChild(card);
+                    // 创建 Intersection Observer
+                    if (!observer) {
+                        observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    const placeholder = entry.target;
+                                    const videoId = placeholder.dataset.videoId;
+                                    const videoData = filteredVideos.find(v => v.id === videoId);
+
+                                    if (videoData) {
+                                        // 创建真实卡片并替换占位符
+                                        const realCard = createVideoCard(videoData);
+                                        placeholder.replaceWith(realCard);
+                                    }
+
+                                    // 停止观察已处理的元素
+                                    observer.unobserve(placeholder);
+                                }
+                            });
+                        }, observerOptions);
+                    }
+
+                    // 观察占位符
+                    observer.observe(placeholder);
+                }
             });
         }
 
